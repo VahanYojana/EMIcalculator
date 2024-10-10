@@ -123,17 +123,23 @@ function calculateNextDate() {
 
     // Set the first EMI date to the start date
     const emiDate = new Date(startDate);
-    
+
     // Calculate the EMI date based on the number of months
     emiDate.setMonth(emiDate.getMonth() + (months - 1));
 
-    // Format the date to dd/mm/yyyy
-    const formattedDate = `${emiDate.getDate()}/${emiDate.getMonth() + 1}/${emiDate.getFullYear()}`;
+    // Ensure day and month are formatted as two digits (e.g., 01 for 1)
+    const day = String(emiDate.getDate()).padStart(2, '0');
+    const month = String(emiDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const year = emiDate.getFullYear();
+
+    // Format the date to ddmmyyyy
+    const formattedDate = `${day}/${month}/${year}`;
 
     // Display the result
     const resultDiv = document.getElementById('result');
     resultDiv.style.display = 'block';
     resultDiv.innerHTML = `<strong>${months} EMI Date:</strong> ${formattedDate}`;
+}
 }
 </script>
 
